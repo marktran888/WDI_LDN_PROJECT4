@@ -38,6 +38,8 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "aws-sdk": "^2.221.1",
+    "bluebird": "^3.5.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1"
   }
