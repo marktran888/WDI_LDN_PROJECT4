@@ -1,9 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.plugin(require('mongoose-unique-validator'));
+mongoose.Promise = require('bluebird');
 
-const app = express();
-const port = process.env.PORT || 4000;
 const router = require('./config/router');
+const { dbURI, port } = require('./config/environment');
+const app = express();
+
+mongoose.connect(dbURI);
+app.use(bodyParser.json());
 
 app.use(express.static(`${__dirname}/public`));
 
