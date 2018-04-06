@@ -9,10 +9,10 @@ const { dbURI, port } = require('./config/environment');
 const app = express();
 
 mongoose.connect(dbURI);
-app.use(bodyParser.json());
 
 app.use(express.static(`${__dirname}/public`));
 
+//5mb for photos
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use('/api', router);
 
