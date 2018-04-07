@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'bulma';
+import './scss/style.scss';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -21,7 +22,7 @@ class App extends React.Component {
             <Switch>
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
-              <Route path="/main" component={Main} />
+              <Route path="/main/:id" component={Main} />
 
             </Switch>
           </section>
