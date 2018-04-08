@@ -24,9 +24,6 @@ class Navbar extends React.Component {
     return (
       <nav className="navbar">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/login">
-          Search Allergies
-          </Link>
           <div
             className={`navbar-burger ${this.state.navIsOpen ? 'is-active' : ''}`}
             onClick={this.handleToggle}
@@ -38,8 +35,8 @@ class Navbar extends React.Component {
         </div>
         <div
           className={`navbar-menu ${this.state.navIsOpen ? 'is-active' : ''}`}>
+          <div className="title">Allergies checker</div>
           <div className="navbar-end">
-            <Link className="navbar-item" to="/user/:id">Allergies</Link>
             {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.handleLogout}>Logout</a>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
