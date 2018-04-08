@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import Auth from '../lib/Auth';
+import Image from './Image';
 
 class Main extends React.Component {
 
   state = {
     image: '',
     allergies: [],
-    newAllergy: ''
+    newAllergy: '',
+    loading: false,
+    matchWords: []
   }
 
   deleteAllergy = (allergy) => {
@@ -17,20 +20,27 @@ class Main extends React.Component {
       ...this.state.allergies.slice(index + 1)
     ];
     this.setState({ allergies: newAllergies} ,() => {
-      axios.put(`/api/main/${this.props.match.params.id}`, this.state, {
+      axios.put(`/api/users/${this.props.match.params.id}`, this.state, {
         headers: { Authorization: Auth.getToken() }
       })
-        .then(console.log(this.state.allergies));
+        .then(() => this.setState({ loading: true }, () => this.analyzeImage(this.state.image)));
     });
   }
 
   componentDidMount() {
-    axios.get(`/api/main/${this.props.match.params.id}`)
-      .then(res => this.setState({ allergies: res.data.allergies }, () => console.log(this.state)));
+    axios.get(`/api/users/${this.props.match.params.id}`)
+      .then(res => this.setState({ allergies: res.data.allergies }));
+  }
+
+  analyzeImage = (image) => {
+    axios.post('/api/rekognition', { image: image }, {
+      headers: { Authorization: Auth.getToken() }
+    })
+      .then(res => this.setState({ matchWords: res.data.watchList, loading: false } ));
   }
 
   handleImage = (image) => {
-    this.setState({ image }, () => console.log(this.state));
+    this.setState({ image: image, loading: true }, () => this.analyzeImage(image));
   }
 
   handleChange = (e) => {
@@ -41,9 +51,10 @@ class Main extends React.Component {
     e.preventDefault();
     const newAllergies = [...this.state.allergies, this.state.newAllergy];
     this.setState({ allergies: newAllergies, newAllergy: '' } ,() => {
-      axios.put(`/api/main/${this.props.match.params.id}`, this.state, {
+      axios.put(`/api/users/${this.props.match.params.id}`, this.state, {
         headers: { Authorization: Auth.getToken() }
-      });
+      })
+        .then(() => this.setState({ loading: true }, () => this.analyzeImage(this.state.image)));
     });
   }
 
@@ -51,26 +62,40 @@ class Main extends React.Component {
     return (
 
       this.state.allergies ? (
-        <div>
-          <ul className="allergiesList">
+        <main>
+          <div>
             <h1 className="title">Allergies List</h1>
-            {this.state.allergies.map((allergies, i) =>
-              <li key={i}>{allergies}
-                <span>
-                  <button onClick={() => this.deleteAllergy(allergies)} >X</button>
-                </span>
-              </li>)}
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                placeholder="New allergy"
-                onChange={this.handleChange}
-                value={this.state.newAllergy}
-              />
-              <button>Add</button>
-            </form>
-          </ul>
-        </div>
+            <ul className="allergiesList">
+              {this.state.allergies.map((allergies, i) =>
+                <li key={i}>{allergies}
+                  <span>
+                    <button onClick={() => this.deleteAllergy(allergies)} >X</button>
+                  </span>
+                </li>)}
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="New allergy"
+                  onChange={this.handleChange}
+                  value={this.state.newAllergy}
+                />
+                <button>Add</button>
+              </form>
+            </ul>
+          </div>
+          <div>
+            <h2 className="title">Image upload</h2>
+            <Image handleChange={this.handleImage} image={this.state.image}/>
+          </div>
+          <div>
+            <h3 className="title">Allergies found</h3>
+            <ul className="allergiesList">
+              {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
+              {this.state.matchWords.map((words, i) =>
+                <li key={i}>{words}</li>)}
+            </ul>
+          </div>
+        </main>
       ) : (
         <div className="container">
           <h1 className="title">LOADING</h1>

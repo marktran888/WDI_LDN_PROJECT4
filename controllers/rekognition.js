@@ -11,8 +11,7 @@ function getText(req, res, next) {
   const imageData = req.body.image.match(/.+base64,(.+)/)[1];
   const buffer = new Buffer(imageData, 'base64');
 
-  // const allergies = getAllergies(req.currentUser._id);
-  const allergies = ['milk', 'sesame', 'Milk'];
+  const allergies = req.currentUser.allergies;
 
   return new Promise((resolve, reject) => {
     rekognition.detectText({
@@ -28,11 +27,14 @@ function getText(req, res, next) {
     // return an array of matching allergins
     .then(textArray => {
       const text = textArray.join(' ');
+      console.log(text);
       const watchList = [];
-      for (let i = 0; i < allergies.length; i++) {
-        if(text.search(new RegExp(allergies[i], 'i'))) watchList.push(allergies[i]);
-        // if(text.includes(allergies[i])) watchList.push(allergies[i]);
-      }
+      allergies.forEach(allergy => {
+        // if(text.includes(allergies[i]) || text.includes(allergies[i].toLowerCase())) watchList.push(allergies[i]);
+        const regex = new RegExp(allergy, 'i');
+        console.log('reg', regex);
+        if(regex.test(text)) watchList.push(allergy);
+      });
       res.json({ watchList });
     })
     .catch(next);

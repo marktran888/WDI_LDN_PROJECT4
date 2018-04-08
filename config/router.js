@@ -2,14 +2,14 @@ const router = require('express').Router();
 const rekognition = require('../controllers/rekognition');
 const auth = require('../controllers/auth');
 const secureRoute = require('../lib/secureRoute');
-const main = require('../controllers/main');
+const users = require('../controllers/users');
 
 router.route('/rekognition')
   .post(secureRoute, rekognition.getText);
 
-router.route('/main/:id')
-  .get(main.show)
-  .put(secureRoute, main.update);
+router.route('/users/:id')
+  .get(users.show)
+  .put(secureRoute, users.update);
 
 router.route('/register')
   .post(auth.register);
