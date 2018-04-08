@@ -35,7 +35,7 @@ function getText(req, res, next) {
         console.log('reg', regex);
         if(regex.test(text)) watchList.push(allergy);
       });
-      res.json({ watchList });
+      res.json({ text, watchList });
     })
     .catch(next);
 }

@@ -10,6 +10,7 @@ class Main extends React.Component {
     allergies: [],
     newAllergy: '',
     loading: false,
+    scannedWords: '',
     matchWords: []
   }
 
@@ -36,7 +37,7 @@ class Main extends React.Component {
     axios.post('/api/rekognition', { image: image }, {
       headers: { Authorization: Auth.getToken() }
     })
-      .then(res => this.setState({ matchWords: res.data.watchList, loading: false } ));
+      .then(res => this.setState({ matchWords: res.data.watchList, scannedWords: res.data.text, loading: false } ));
   }
 
   handleImage = (image) => {
@@ -68,7 +69,7 @@ class Main extends React.Component {
             <ul className="allergiesList">
               {this.state.allergies.map((allergies, i) =>
                 <li key={i}>{allergies}
-                  <span>
+                  <span className="spanRight">
                     <button onClick={() => this.deleteAllergy(allergies)} >X</button>
                   </span>
                 </li>)}
@@ -89,11 +90,26 @@ class Main extends React.Component {
           </div>
           <div>
             <h3 className="title">Allergies found</h3>
-            <ul className="allergiesList">
-              {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
-              {this.state.matchWords.map((words, i) =>
-                <li key={i}>{words}</li>)}
-            </ul>
+            {this.state.matchWords.length>0 ?  (
+              <ul className="allergiesList2">
+                {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
+                {this.state.matchWords.map((words, i) =>
+                  <li key={i}>{words}</li>)}
+              </ul>
+            ) : (
+              <ul className="allergiesList">
+                {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
+                {this.state.matchWords.map((words, i) =>
+                  <li key={i}>{words}</li>)}
+              </ul>
+            )}
+
+          </div>
+          <div>
+            <h4 className="title">Ingredients found</h4>
+            <div className="allergiesList">
+              {this.state.scannedWords}
+            </div>
           </div>
         </main>
       ) : (

@@ -4,14 +4,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  padding: 20px;
 }
 
 .allergiesList{
-  height: 300px;
   background-color: #ccc;
+  padding: 20px;
+}
+.allergiesList2{
+  background-color: red;
+  padding: 20px;
 }
 
-span {
+.spanRight {
   float: right;
 }
 
