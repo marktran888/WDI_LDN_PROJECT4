@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
+import Flash from '../../lib/Flash';
 
 class Register extends React.Component {
 
@@ -19,9 +20,9 @@ class Register extends React.Component {
         Auth.setToken(res.data.token);
         id = res.data.user._id;
       })
+      .then(() => Flash.setMessage('success', 'Welcome back!'))
       .then(() => this.props.history.push(`/user/${id}`));
   }
-
 
   render() {
     return (

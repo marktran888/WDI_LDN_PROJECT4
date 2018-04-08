@@ -11,6 +11,8 @@ import Login from './components/auth/Login';
 import Main from './components/Main';
 import Navbar from './components/Navbar';
 
+import FlashMessages from './components/FlashMessages';
+
 class App extends React.Component {
 
 
@@ -20,6 +22,7 @@ class App extends React.Component {
       <BrowserRouter>
         <main>
           <Navbar />
+          <FlashMessages />
           <section className="section">
             <Switch>
               <Route path="/register" component={Register} />
