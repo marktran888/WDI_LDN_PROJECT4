@@ -27,12 +27,11 @@ function getText(req, res, next) {
     // return an array of matching allergins
     .then(textArray => {
       const text = textArray.join(' ');
-      console.log(text);
       const watchList = [];
       allergies.forEach(allergy => {
         // if(text.includes(allergies[i]) || text.includes(allergies[i].toLowerCase())) watchList.push(allergies[i]);
         const regex = new RegExp(allergy, 'i');
-        console.log('reg', regex);
+        // console.log('reg', regex);
         if(regex.test(text)) watchList.push(allergy);
       });
       res.json({ text, watchList });

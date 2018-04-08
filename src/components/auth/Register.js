@@ -16,12 +16,14 @@ class Register extends React.Component {
     // make a post request to /api/register
     // send the form data
     e.preventDefault();
+    let id ='';
     axios.post('/api/register', this.state) // this.state is the form data, we are storing the form data in state
     //   // the response has the user, token and message. We need to put it in local storage.
       .then(res => {
         Auth.setToken(res.data.token);
-      });
-    // .then(() => this.props.history.push('/main'));
+        id = res.data.user._id;
+      })
+      .then(() => this.props.history.push(`/user/${id}`));
   }
 
 
