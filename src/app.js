@@ -10,8 +10,9 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Main from './components/Main';
 import Navbar from './components/Navbar';
-
 import FlashMessages from './components/FlashMessages';
+import ProtectedRoute from './components/ProtectedRoute';
+import NotFound from './components/NotFound';
 
 class App extends React.Component {
 
@@ -27,8 +28,8 @@ class App extends React.Component {
             <Switch>
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
-              <Route path="/user/:id" component={Main} />
-
+              <ProtectedRoute path="/user/:id" component={Main} />
+              <Route component={NotFound} />
             </Switch>
           </section>
         </main>

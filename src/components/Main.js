@@ -24,7 +24,7 @@ class Main extends React.Component {
       axios.put(`/api/users/${this.props.match.params.id}`, this.state, {
         headers: { Authorization: Auth.getToken() }
       })
-        .then(() => this.state.image && this.setState({ loading: true }, () => this.state.image && this.analyzeImage(this.state.image)));
+        .then(() => this.state.image && this.setState({ loading: true }, () =>  this.analyzeImage(this.state.image)));
     });
   }
 
@@ -55,7 +55,7 @@ class Main extends React.Component {
       axios.put(`/api/users/${this.props.match.params.id}`, this.state, {
         headers: { Authorization: Auth.getToken() }
       })
-        .then(() => this.state.image && this.setState({ loading: true }, () => this.state.image && this.analyzeImage(this.state.image)));
+        .then(() => this.state.image && this.setState({ loading: true }, () =>  this.analyzeImage(this.state.image)));
     });
   }
 
