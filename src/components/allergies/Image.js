@@ -27,6 +27,7 @@ class Image extends React.Component {
 
     return (
       <div>
+        <h1 className="title">Image upload</h1>
         <input type="file" accept="image/*;capture=camera" ref={element => this.input = element}/>
         {/* <input type="file" accept="image/*" ref={element => this.input = element}/> */}
         <div className="dropzone" ref={element => this.dropzone = element} style={{backgroundImage: `url(${this.props.image})`}}></div>

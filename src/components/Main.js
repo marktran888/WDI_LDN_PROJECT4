@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import Auth from '../lib/Auth';
-import Image from './Image';
+import Image from './allergies/Image';
+import AllergiesFound from './allergies/AllergiesFound';
+import AllergiesList from './allergies/AllergiesList';
+import ScannedWords from './allergies/ScannedWords';
 
 class Main extends React.Component {
 
@@ -64,53 +67,10 @@ class Main extends React.Component {
 
       this.state.allergies ? (
         <main>
-          <div>
-            <h1 className="title">Allergies List</h1>
-            <ul className="allergiesList">
-              {this.state.allergies.map((allergies, i) =>
-                <li key={i}>{allergies}
-                  <span className="spanRight">
-                    <button onClick={() => this.deleteAllergy(allergies)} >X</button>
-                  </span>
-                </li>)}
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="New allergy"
-                  onChange={this.handleChange}
-                  value={this.state.newAllergy}
-                />
-                <button>Add</button>
-              </form>
-            </ul>
-          </div>
-          <div>
-            <h2 className="title">Image upload</h2>
-            <Image handleChange={this.handleImage} image={this.state.image}/>
-          </div>
-          <div>
-            <h3 className="title">Allergies found</h3>
-            {this.state.matchWords.length>0 ?  (
-              <ul className="allergiesList2">
-                {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
-                {this.state.matchWords.map((words, i) =>
-                  <li key={i}>{words}</li>)}
-              </ul>
-            ) : (
-              <ul className="allergiesList">
-                {this.state.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
-                {this.state.matchWords.map((words, i) =>
-                  <li key={i}>{words}</li>)}
-              </ul>
-            )}
-
-          </div>
-          <div>
-            <h4 className="title">Ingredients found</h4>
-            <div className="allergiesList">
-              {this.state.scannedWords}
-            </div>
-          </div>
+          <AllergiesList data={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} deleteAllergy={this.deleteAllergy} />
+          <Image handleChange={this.handleImage} image={this.state.image} />
+          <AllergiesFound data={this.state} />
+          <ScannedWords data={this.state} />
         </main>
       ) : (
         <div className="container">
