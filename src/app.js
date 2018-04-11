@@ -16,16 +16,25 @@ import NotFound from './components/NotFound';
 
 class App extends React.Component {
 
-
-
   render() {
+
     return (
       <BrowserRouter>
         <main>
           <Navbar />
+          <section className="hero banner">
+            <div className="hero-body">
+              <div className="container has-text-centered">
+                <h1 className="title has-text-white logotheme">
+                  Ingredients Checker <i className="fas fa-search"></i> <i className="fas fa-images"></i>
+                </h1>
+              </div>
+            </div>
+          </section>
           <FlashMessages />
           <section className="section">
             <Switch>
+              <Route exact path="/" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
               <ProtectedRoute path="/user/:id" component={Main} />

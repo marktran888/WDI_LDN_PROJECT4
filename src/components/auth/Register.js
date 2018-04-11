@@ -33,46 +33,47 @@ class Register extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <div className="forms">
+          <div className="field">
+            <label htmlFor="username">Username</label>
+            <input className="input"
+              placeholder="Username"
+              name="username"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="email">Email</label>
+            <input
+              className="input"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              className="input"
+              placeholder="Password"
+              name="password"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="passwordConfirmation">Password Confirmation</label>
+            <input
+              type="password"
+              className="input"
+              placeholder="Password Confirmation"
+              name="passwordConfirmation"
+              onChange={this.handleChange}
+            />
+          </div>
+          <button className="button is-primary">Submit</button>
+        </div>
 
-        <div className="field">
-          <label htmlFor="username">Username</label>
-          <input className="input"
-            placeholder="Username"
-            name="username"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input
-            className="input"
-            placeholder="Email"
-            name="email"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="input"
-            placeholder="Password"
-            name="password"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="passwordConfirmation">Password Confirmation</label>
-          <input
-            type="password"
-            className="input"
-            placeholder="Password Confirmation"
-            name="passwordConfirmation"
-            onChange={this.handleChange}
-          />
-        </div>
-
-        <button className="button is-primary">Submit</button>
       </form>
     );
   }

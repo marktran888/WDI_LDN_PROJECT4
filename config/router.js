@@ -8,7 +8,7 @@ router.route('/rekognition')
   .post(secureRoute, rekognition.getText);
 
 router.route('/users/:id')
-  .get(users.show)
+  .get(secureRoute, users.show)
   .put(secureRoute, users.update);
 
 router.route('/register')
