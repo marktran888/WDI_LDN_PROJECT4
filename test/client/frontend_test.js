@@ -6,8 +6,8 @@ import { shallow } from 'enzyme'; //shallow render
 import AllergiesFound from '../../src/components/allergies/AllergiesFound';
 import AllergiesList from '../../src/components/allergies/AllergiesList';
 import ScannedWords from '../../src/components/allergies/ScannedWords';
-
-import Navbar from '../../src/components/Navbar';
+import Login from '../../src/components/auth/Login';
+import Register from '../../src/components/auth/Register';
 
 describe('Picks tests', () => {
 
@@ -37,9 +37,20 @@ describe('Picks tests', () => {
     expect(wrapper.find({ className: 'title' }).text()).to.equal('Ingredients found');
     done();
   });
-  it('should render navbar component ', done => {
-    const wrapper = shallow(<Navbar />);
-    expect(wrapper.find({ className: 'navbar' }).childAt(0).hasClass('navbar-brand')).to.equal(true);
+
+  it('should render form on Login ', done => {
+    const wrapper = shallow(<Login />);
+    expect(wrapper.find({ htmlFor: 'email' }).text()).to.equal('Email');
+    expect(wrapper.find({ htmlFor: 'password' }).text()).to.equal('Password');
+    done();
+  });
+
+  it('should render form on Register ', done => {
+    const wrapper = shallow(<Register />);
+    expect(wrapper.find({ htmlFor: 'username' }).text()).to.equal('Username');
+    expect(wrapper.find({ htmlFor: 'email' }).text()).to.equal('Email');
+    expect(wrapper.find({ htmlFor: 'password' }).text()).to.equal('Password');
+    expect(wrapper.find({ htmlFor: 'passwordConfirmation' }).text()).to.equal('Password Confirmation');
     done();
   });
 
