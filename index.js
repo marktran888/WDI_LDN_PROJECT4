@@ -16,6 +16,7 @@ app.use(express.static(`${__dirname}/public`));
 //5mb for photos
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use('/api', router);
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 app.use(errorHandler);
 
