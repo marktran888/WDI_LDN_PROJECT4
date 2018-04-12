@@ -9,7 +9,7 @@ const AllergiesList = ({ handleChange, handleSubmit, deleteAllergy, data }) => {
         {data.allergies.map((allergies, i) =>
           <li key={i}>{allergies}
             <span className="spanRight">
-              <button onClick={() => deleteAllergy(allergies)} >X</button>
+              <button className="btn" onClick={() => deleteAllergy(allergies)} >X</button>
             </span>
           </li>)}
         <form onSubmit={handleSubmit}>
@@ -19,7 +19,7 @@ const AllergiesList = ({ handleChange, handleSubmit, deleteAllergy, data }) => {
             onChange={handleChange}
             value={data.newAllergy}
           />
-          <button>Add</button>
+          <button className="btn">Add</button>
         </form>
       </ul>
     </div>

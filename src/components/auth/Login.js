@@ -47,7 +47,7 @@ class Register extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <button className="button is-primary" id="btn">Submit</button>
+          <button className="btn">Submit</button>
         </div>
 
 
