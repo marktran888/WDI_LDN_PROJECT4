@@ -6,6 +6,7 @@ const AllergiesList = ({ handleChange, handleSubmit, deleteAllergy, data }) => {
     <div>
       <h1 className="title">Allergies List</h1>
       <ul className="allergiesList">
+        {data.loading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
         {data.allergies.map((allergies, i) =>
           <li key={i}>{allergies}
             <span className="spanRight">

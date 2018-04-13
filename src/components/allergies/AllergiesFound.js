@@ -3,6 +3,7 @@ import React from 'react';
 const AllergiesFound = ({ data }) => {
 
   return (
+    data.matchWords.length>0 && 
     <div>
       <h1 className="title">Allergies found</h1>
       {data.matchWords.length>0 ?  (

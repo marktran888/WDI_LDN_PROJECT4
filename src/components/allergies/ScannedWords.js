@@ -3,6 +3,7 @@ import React from 'react';
 const ScannedWords = ({ data }) => {
 
   return (
+    data.scannedWords.length >0 &&
     <div>
       <h1 className="title">Ingredients found</h1>
       <div className="allergiesList">
