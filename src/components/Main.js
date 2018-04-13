@@ -91,13 +91,13 @@ class Main extends React.Component {
           <FlashMessages />
           <div className="columns is-multiline">
             <div className="column is-mobile is-half-tablet is-half-desktop">
-              <AllergiesFound data={this.state} />
-            </div>
-            <div className="column is-mobile is-half-tablet is-half-desktop">
               <AllergiesList data={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} deleteAllergy={this.deleteAllergy} />
             </div>
             <div className="column is-mobile is-half-tablet is-half-desktop">
               <Image handleChange={this.handleImage} image={this.state.image} />
+            </div>
+            <div className="column is-mobile is-half-tablet is-half-desktop">
+              <AllergiesFound data={this.state} />
             </div>
             <div className="column is-mobile is-half-tablet is-half-desktop">
               <ScannedWords data={this.state} />
