@@ -3,7 +3,7 @@ import axios from 'axios';
 import Auth from '../../lib/Auth';
 import Flash from '../../lib/Flash';
 
-class Register extends React.Component {
+class Login extends React.Component {
 
   state= {}
 
@@ -56,4 +56,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default Login;
